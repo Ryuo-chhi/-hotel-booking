@@ -4,7 +4,7 @@
  * Responsibility: Defines the schema mapping to the 'room_types' table.
  */
 
-import sequelize from '../config/db.js';
+import sequelize from "../config/db.js";
 import { DataTypes } from "sequelize";
 
 const room_types = sequelize.define("room_types", {

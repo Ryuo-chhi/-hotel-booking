@@ -6,6 +6,6 @@
 
 const createBookingSchema = [];
 
-export default {
+export {
   createBookingSchema
 };

@@ -26,7 +26,7 @@ const updateStatusByBookingId = async (bookingId, status, ref) => {
   // Stub
 };
 
-export default {
+export {
   create,
   updateStatusByBookingId
 };

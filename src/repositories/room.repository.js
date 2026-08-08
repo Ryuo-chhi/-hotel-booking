@@ -28,7 +28,7 @@ const create = async (data) => {
   // Stub
 };
 
-export default {
+export {
   findAvailableRoomInType,
   create
 };

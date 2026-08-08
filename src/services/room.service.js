@@ -27,7 +27,7 @@ const addRoom = async (roomData) => {
   // Stub
 };
 
-export default {
+export {
   getAvailableRoomTypes,
   addRoom
 };

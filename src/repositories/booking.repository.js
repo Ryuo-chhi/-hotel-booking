@@ -37,7 +37,7 @@ const findById = async (id) => {
   // Stub
 };
 
-export default {
+export {
   createBookingWithTransaction,
   findOverlappingBookings,
   findById

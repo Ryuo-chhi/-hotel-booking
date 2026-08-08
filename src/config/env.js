@@ -32,11 +32,11 @@ const server = {
  * @type {object}
  */
 const jwt = {
-  secret: '',
-  expiresIn: '1h'
+  secret: process.env.JWT_SECRET || 'super_secret_dev_key_123',
+  expiresIn: process.env.JWT_EXPIRES_IN || '1h'
 };
 
-export default {
+export {
   db,
   server,
   jwt

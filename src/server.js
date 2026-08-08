@@ -7,23 +7,24 @@
 
 import app from './app.js';
 import { sequelize } from './models/index.js';
+import logger from './utils/logger.js';
 
-const PORT = process.env.PORT || 5000;
+const PORT =  3000;
 
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log('Database connected successfully.');
+    logger.info('Database connected successfully.');
 
     // Sync database models with DB tables
     await sequelize.sync();
-    console.log('Database synced successfully.');
+    logger.info('Database synced successfully.');
 
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      logger.info(`Server running on port: http://localhost:${PORT}`);
     });
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    logger.error(`Unable to connect to the database: ${error.message}`, error);
   }
 }
 

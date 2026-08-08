@@ -7,7 +7,7 @@
 const searchSchema = [];
 const createRoomSchema = [];
 
-export default {
+export {
   searchSchema,
   createRoomSchema
 };

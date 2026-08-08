@@ -1,3 +1,6 @@
+import { user as User } from "../models/index.js";
+
+
 /**
  * User Repository
  * 
@@ -11,7 +14,7 @@
  * @returns {Promise<object|null>} Sequelize model user instance or null
  */
 const findByEmail = async (email) => {
-  // Stub
+  return await User.findOne({ where: { email } });
 };
 
 /**
@@ -21,7 +24,9 @@ const findByEmail = async (email) => {
  * @returns {Promise<object|null>} Sequelize model user instance or null
  */
 const findById = async (id) => {
-  // Stub
+  return await User.findByPk(id, {
+    attributes: { exclude: ['password'] } // We don't want to send the password back!
+  });
 };
 
 /**
@@ -31,10 +36,20 @@ const findById = async (id) => {
  * @returns {Promise<object>} Created user record instance
  */
 const create = async (data) => {
-  // Stub
+  const { username, email, password, phone_number, role } = data;
+
+  const user = await User.create({
+    username,
+    email,
+    password,
+    phone_number,
+    role
+  });
+
+  return user;
 };
 
-export default {
+export {
   findByEmail,
   findById,
   create

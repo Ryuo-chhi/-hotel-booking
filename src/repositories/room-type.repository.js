@@ -16,6 +16,6 @@ const findWithAvailableRooms = async (checkIn, checkOut, guests) => {
   // Stub
 };
 
-export default {
+export {
   findWithAvailableRooms
 };

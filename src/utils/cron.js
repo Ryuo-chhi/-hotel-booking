@@ -11,6 +11,6 @@ function startCronJobs() {
   // Stub
 }
 
-export default {
+export {
   startCronJobs
 };

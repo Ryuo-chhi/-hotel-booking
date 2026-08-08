@@ -30,7 +30,7 @@ const cancelBooking = async (bookingId, userId, role) => {
   // Stub
 };
 
-export default {
+export {
   initiateBooking,
   cancelBooking
 };

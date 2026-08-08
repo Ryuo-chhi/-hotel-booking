@@ -40,7 +40,7 @@ const getBookings = async (req, res, next) => {
   // Stub
 };
 
-export default {
+export {
   createBooking,
   cancelBooking,
   getBookings

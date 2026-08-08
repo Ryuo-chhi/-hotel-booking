@@ -27,7 +27,7 @@ const processWebhook = async (bookingId, status, txRef) => {
   // Stub
 };
 
-export default {
+export {
   initializePayment,
   processWebhook
 };

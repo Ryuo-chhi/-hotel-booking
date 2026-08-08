@@ -1,50 +1,27 @@
 /**
  * Custom Operational Errors Framework
  * 
- * Responsibility: Defines class templates matching specific API status outcomes.
+ * Responsibility: Defines factory functions matching specific API status outcomes.
  */
 
-class AppError extends Error {
-  constructor(message, statusCode) {
-    super(message);
-    this.statusCode = statusCode;
-    this.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
-    this.isOperational = true;
-    Error.captureStackTrace(this, this.constructor);
-  }
-}
+const createError = (name, statusCode, message) => {
+  const error = new Error(message);
+  error.name = name;
+  error.statusCode = statusCode;
+  error.status = `${statusCode}`.startsWith('4') ? 'fail' : 'error';
+  error.isOperational = true;
+  Error.captureStackTrace(error, createError);
+  return error;
+};
 
-class BadRequestError extends AppError {
-  constructor(message = 'Bad Request') {
-    super(message, 400);
-  }
-}
+const AppError = (message, statusCode) => createError('AppError', statusCode, message);
+const BadRequestError = (message = 'Bad Request') => createError('BadRequestError', 400, message);
+const UnauthorizedError = (message = 'Unauthorized') => createError('UnauthorizedError', 401, message);
+const ForbiddenError = (message = 'Forbidden') => createError('ForbiddenError', 403, message);
+const NotFoundError = (message = 'Not Found') => createError('NotFoundError', 404, message);
+const ConflictError = (message = 'Conflict') => createError('ConflictError', 409, message);
 
-class UnauthorizedError extends AppError {
-  constructor(message = 'Unauthorized') {
-    super(message, 401);
-  }
-}
-
-class ForbiddenError extends AppError {
-  constructor(message = 'Forbidden') {
-    super(message, 403);
-  }
-}
-
-class NotFoundError extends AppError {
-  constructor(message = 'Not Found') {
-    super(message, 404);
-  }
-}
-
-class ConflictError extends AppError {
-  constructor(message = 'Conflict') {
-    super(message, 409);
-  }
-}
-
-export default {
+export {
   AppError,
   BadRequestError,
   UnauthorizedError,

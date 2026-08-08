@@ -5,7 +5,7 @@
  * including password exclusion in default scopes.
  */
 
-import sequelize from '../config/db.js';
+import sequelize from "../config/db.js";
 import { DataTypes } from "sequelize";
 
 const users= sequelize.define('users',{

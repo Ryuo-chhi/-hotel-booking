@@ -8,7 +8,7 @@
 const apiLimiter = (req, res, next) => next();
 const authLimiter = (req, res, next) => next();
 
-export default {
+export {
   apiLimiter,
   authLimiter
 };

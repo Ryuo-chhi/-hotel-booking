@@ -28,7 +28,7 @@ const webhook = async (req, res, next) => {
   // Stub
 };
 
-export default {
+export {
   checkout,
   webhook
 };

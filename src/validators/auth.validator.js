@@ -9,7 +9,7 @@ import { body } from 'express-validator';
 /**
  * Schema for validating user registration requests.
  */
-export const registerSchema = [
+const registerSchema = [
   body('username')
     .trim()
     .notEmpty().withMessage('Username is required')
@@ -33,7 +33,7 @@ export const registerSchema = [
 /**
  * Schema for validating user login requests.
  */
-export const loginSchema = [
+const loginSchema = [
   body('email')
     .trim()
     .notEmpty().withMessage('Email is required')
@@ -43,7 +43,7 @@ export const loginSchema = [
     .notEmpty().withMessage('Password is required')
 ];
 
-export default {
+export {
   registerSchema,
   loginSchema
 };

@@ -4,7 +4,7 @@
  * Responsibility: Defines the schema mapping to the 'bookings' table.
  */
 
-import sequelize from '../config/db.js';
+import sequelize from "../config/db.js";
 import { DataTypes } from 'sequelize';
 
 

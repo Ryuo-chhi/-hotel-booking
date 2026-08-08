@@ -28,7 +28,7 @@ const createRoom = async (req, res, next) => {
   // Stub
 };
 
-export default {
+export {
   searchAvailableRoomTypes,
   createRoom
 };

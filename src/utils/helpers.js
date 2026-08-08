@@ -29,7 +29,7 @@ const getNightCount = (start, end) => {
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
 
-export default {
+export {
   asyncHandler,
   getNightCount
 };

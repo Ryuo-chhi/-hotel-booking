@@ -7,7 +7,7 @@ This document breaks down the 10-day roadmap into five concrete, executable impl
 ## 📊 Overall Progress Summary
 
 - [x] **Phase 1: Foundation & Database Architecture** (Completed)
-- [ ] **Phase 2: Authentication & Role Security** (In Progress)
+- [x] **Phase 2: Authentication & Role Security** (Completed)
 - [ ] **Phase 3: Room Inventory & Availability Search** (Pending)
 - [ ] **Phase 4: Atomic Booking Lifecycle** (Pending)
 - [ ] **Phase 5: Mock Payments & End-to-End Validation** (Pending)
@@ -58,15 +58,15 @@ This document breaks down the 10-day roadmap into five concrete, executable impl
 *Implements password security, session token generation (JWT), and authorization route guards.*
 
 ### 2.1 Target Files & Layers
-- [ ] **Route Validation**:
+- [x] **Route Validation**:
   - [auth.validator.js](file:///d:/CADT/Projects/hotel-booking/src/validators/auth.validator.js) (Express-validator constraints for login and signup schemas)
-- [ ] **Data Layers**:
+- [x] **Data Layers**:
   - [user.repository.js](file:///d:/CADT/Projects/hotel-booking/src/repositories/user.repository.js) (`findByEmail`, `create`, `findById`)
   - [auth.service.js](file:///d:/CADT/Projects/hotel-booking/src/services/auth.service.js) (bcrypt password hashing, sign token claims)
   - [auth.controller.js](file:///d:/CADT/Projects/hotel-booking/src/controllers/auth.controller.js) (register, login, profile mapping)
-- [ ] **Security Middlewares**:
+- [x] **Security Middlewares**:
   - [auth.middleware.js](file:///d:/CADT/Projects/hotel-booking/src/middlewares/auth.middleware.js) (`verifyToken`, `requireRole` check)
-- [ ] **Routing**:
+- [x] **Routing**:
   - [auth.routes.js](file:///d:/CADT/Projects/hotel-booking/src/routes/auth.routes.js) (mount `/register`, `/login`, `/profile`)
 
 ### 2.2 Verification Checklist
@@ -129,9 +129,9 @@ This document breaks down the 10-day roadmap into five concrete, executable impl
   - [payment.controller.js](file:///d:/CADT/Projects/hotel-booking/src/controllers/payment.controller.js) (checkout, webhook endpoint handlers)
 - [ ] **Routing**:
   - [payment.routes.js](file:///d:/CADT/Projects/hotel-booking/src/routes/payment.routes.js)
-- [ ] **Middlewares**:
+- [x] **Middlewares**:
   - [error.middleware.js](file:///d:/CADT/Projects/hotel-booking/src/middlewares/error.middleware.js) (global handler catching exceptions)
-- [ ] **Express Entry**:
+- [x] **Express Entry**:
   - [app.js](file:///d:/CADT/Projects/hotel-booking/src/app.js) & [server.js](file:///d:/CADT/Projects/hotel-booking/src/server.js)
 
 ### 5.2 Verification Checklist
