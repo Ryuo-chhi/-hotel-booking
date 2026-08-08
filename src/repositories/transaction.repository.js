@@ -1,0 +1,31 @@
+/**
+ * Transaction Repository
+ * 
+ * Responsibility: Executes database commands for logging financial transactions.
+ */
+
+class TransactionRepository {
+  /**
+   * Persist a new transaction log.
+   * 
+   * @param {object} data - Model properties
+   * @returns {Promise<object>} Created transaction instance
+   */
+  async create(data) {
+    // Stub
+  }
+
+  /**
+   * Updates transaction status by associated booking ID.
+   * 
+   * @param {number} bookingId - Reservation reference
+   * @param {string} status - New transaction status
+   * @param {string} ref - Payment reference identifier
+   * @returns {Promise<number>} Count of affected rows
+   */
+  async updateStatusByBookingId(bookingId, status, ref) {
+    // Stub
+  }
+}
+
+export default new TransactionRepository();
