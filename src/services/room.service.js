@@ -5,28 +5,29 @@
  * matches guest counts against room capacities, and manages room updates.
  */
 
-class RoomService {
-  /**
-   * Fetch available room types and their current pricing.
-   * 
-   * @param {string} checkIn - Date of arrival
-   * @param {string} checkOut - Date of departure
-   * @param {number} guests - Capacity count
-   * @returns {Promise<Array>} List of available room types
-   */
-  async getAvailableRoomTypes(checkIn, checkOut, guests) {
-    // Stub
-  }
+/**
+ * Fetch available room types and their current pricing.
+ * 
+ * @param {string} checkIn - Date of arrival
+ * @param {string} checkOut - Date of departure
+ * @param {number} guests - Capacity count
+ * @returns {Promise<Array>} List of available room types
+ */
+const getAvailableRoomTypes = async (checkIn, checkOut, guests) => {
+  // Stub
+};
 
-  /**
-   * Add a new physical room unit.
-   * 
-   * @param {object} roomData - Physical room details
-   * @returns {Promise<object>} Created room record
-   */
-  async addRoom(roomData) {
-    // Stub
-  }
-}
+/**
+ * Add a new physical room unit.
+ * 
+ * @param {object} roomData - Physical room details
+ * @returns {Promise<object>} Created room record
+ */
+const addRoom = async (roomData) => {
+  // Stub
+};
 
-export default new RoomService();
+export default {
+  getAvailableRoomTypes,
+  addRoom
+};
