@@ -9,6 +9,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import logger from './utils/logger.js';
 
 import authRoutes from "./routes/auth.routes.js";
@@ -26,6 +27,7 @@ app.use(morgan('dev', {
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Route loading placeholders
 app.use("/api/auth", authRoutes);

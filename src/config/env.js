@@ -33,7 +33,9 @@ const server = {
  */
 const jwt = {
   secret: process.env.JWT_SECRET || 'super_secret_dev_key_123',
-  expiresIn: process.env.JWT_EXPIRES_IN || '1h'
+  expiresIn: process.env.JWT_EXPIRES_IN || '15m', // shorten to 15m as per best practice
+  refreshSecret: process.env.JWT_REFRESH_SECRET || 'super_secret_refresh_key_456',
+  refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d'
 };
 
 export {

@@ -71,9 +71,9 @@ This document breaks down the 10-day roadmap into five concrete, executable impl
 
 ### 2.2 Verification Checklist
 - [ ] Run unit tests for Auth Service: `npm run test:unit -- src/tests/unit/auth.service.test.js`
-- [ ] Test signup payload validations using Postman/Supertest:
-  - [ ] Verify that missing fields return `400 Bad Request` with validation error messages.
-  - [ ] Verify that successful credentials return `201 Created` with signed token claims.
+- [x] Test signup payload validations using Postman/Supertest:
+  - [x] Verify that missing fields return `400 Bad Request` with validation error messages.
+  - [x] Verify that successful credentials return `201 Created` with signed token claims.
 
 ---
 

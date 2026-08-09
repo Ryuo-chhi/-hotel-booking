@@ -49,8 +49,20 @@ const create = async (data) => {
   return user;
 };
 
+/**
+ * Update an existing user record.
+ * 
+ * @param {number} id - User PK reference
+ * @param {object} data - Model properties to update
+ * @returns {Promise<object>}
+ */
+const update = async (id, data) => {
+  return await User.update(data, { where: { id } });
+};
+
 export {
   findByEmail,
   findById,
-  create
+  create,
+  update
 };

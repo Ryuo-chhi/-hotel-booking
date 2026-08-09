@@ -39,14 +39,23 @@ const registerUser = async (userData) => {
     role: role || 'customer'
   });
 
-  // Generate JWT token
+  // Generate JWT tokens
   const token = jwt.sign(
     { id: user.id, role: user.role },
     env.jwt.secret,
     { expiresIn: env.jwt.expiresIn }
   );
 
-  // Return user and token
+  const refreshToken = jwt.sign(
+    { id: user.id },
+    env.jwt.refreshSecret,
+    { expiresIn: env.jwt.refreshExpiresIn }
+  );
+
+  // Save refresh token to user
+  await userRepository.update(user.id, { refreshToken });
+
+  // Return user and tokens
   return {
     user: {
       id: user.id,
@@ -56,7 +65,8 @@ const registerUser = async (userData) => {
       role: user.role,
       createdAt: user.createdAt
     },
-    token
+    token,
+    refreshToken
   };
 };
 
@@ -86,6 +96,14 @@ const authenticateUser = async (email, password) => {
     { expiresIn: env.jwt.expiresIn }
   );
 
+  const refreshToken = jwt.sign(
+    { id: user.id },
+    env.jwt.refreshSecret,
+    { expiresIn: env.jwt.refreshExpiresIn }
+  );
+
+  await userRepository.update(user.id, { refreshToken });
+
   return {
     user: {
       id: user.id,
@@ -93,7 +111,8 @@ const authenticateUser = async (email, password) => {
       email: user.email,
       role: user.role
     },
-    token
+    token,
+    refreshToken
   };
 };
 
@@ -111,8 +130,59 @@ const getUserProfile = async (userId) => {
   return user;
 };
 
+/**
+ * Refresh the authentication tokens
+ * 
+ * @param {string} token - Refresh token
+ * @returns {Promise<object>} New session tokens
+ */
+const refreshAuth = async (token) => {
+  if (!token) throw errors.UnauthorizedError("No refresh token provided");
+  
+  try {
+    const decoded = jwt.verify(token, env.jwt.refreshSecret);
+    const user = await userRepository.findById(decoded.id);
+
+    if (!user || user.refreshToken !== token) {
+      throw errors.UnauthorizedError("Invalid refresh token");
+    }
+
+    const newAccessToken = jwt.sign(
+      { id: user.id, role: user.role },
+      env.jwt.secret,
+      { expiresIn: env.jwt.expiresIn }
+    );
+    // Refresh Token Rotation
+    const newRefreshToken = jwt.sign(
+      { id: user.id },
+      env.jwt.refreshSecret,
+      { expiresIn: env.jwt.refreshExpiresIn }
+    );
+
+    await userRepository.update(user.id, { refreshToken: newRefreshToken });
+
+    return {
+      token: newAccessToken,
+      refreshToken: newRefreshToken
+    };
+  } catch (error) {
+    throw errors.UnauthorizedError("Invalid refresh token");
+  }
+};
+
+/**
+ * Logout user by clearing their refresh token
+ * 
+ * @param {number} userId 
+ */
+const logoutUser = async (userId) => {
+  await userRepository.update(userId, { refreshToken: null });
+};
+
 export {
   registerUser,
   authenticateUser,
-  getUserProfile
+  getUserProfile,
+  refreshAuth,
+  logoutUser
 };

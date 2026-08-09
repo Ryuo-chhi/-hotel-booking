@@ -36,6 +36,10 @@ const users= sequelize.define('users',{
   role:{
     type: DataTypes.ENUM('admin','manager','staff','customer'),
     allowNull: false,
+  },
+  refreshToken: {
+    type: DataTypes.STRING,
+    allowNull: true
   }
 })
 

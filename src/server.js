@@ -12,16 +12,18 @@ import logger from './utils/logger.js';
 const PORT =  3000;
 
 async function startServer() {
+  const startTime = Date.now();
   try {
     await sequelize.authenticate();
     logger.info('Database connected successfully.');
 
-    // Sync database models with DB tables
-    await sequelize.sync();
+    // Sync database models with DB tables (alter: true adds missing columns)
+    await sequelize.sync({ alter: true });
     logger.info('Database synced successfully.');
 
     app.listen(PORT, () => {
-      logger.info(`Server running on port: http://localhost:${PORT}`);
+      const duration = Date.now() - startTime;
+      logger.info(`Server running on port: http://localhost:${PORT} (started in ${duration}ms)`);
     });
   } catch (error) {
     logger.error(`Unable to connect to the database: ${error.message}`, error);
