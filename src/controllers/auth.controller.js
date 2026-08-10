@@ -6,6 +6,8 @@
  */
 
 import * as authService from "../services/auth.service.js";
+import * as env from "../config/env.js";
+
 
 /**
  * Register a new customer user.
@@ -17,13 +19,14 @@ import * as authService from "../services/auth.service.js";
  */
 const register = async (req, res, next) => {
   try {
-    const { user, token, refreshToken } = await authService.registerUser(req.body);
+    const device_name = req.headers['user-agent'] || 'unknown';
+    const { user, token, refreshToken } = await authService.registerUser({...req.body,device_name});
     
     // Set HttpOnly cookie for refresh token
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: env.jwt.refreshExpiresInMs
     });
 
     res.status(201).json({
@@ -49,13 +52,14 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const {email, password} = req.body;
-    const { user, token, refreshToken } = await authService.authenticateUser(email, password);
+    const device_name = req.headers['user-agent'] || 'unknown';
+    const { user, token, refreshToken } = await authService.authenticateUser(email, password, device_name);
 
     // Set HttpOnly cookie for refresh token
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: env.jwt.refreshExpiresInMs
     });
 
     res.status(200).json({
@@ -117,7 +121,7 @@ const refreshToken = async (req, res, next) => {
     res.cookie('refreshToken', newRefreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: env.jwt.refreshExpiresInMs
     });
 
     res.status(200).json({
@@ -140,14 +144,9 @@ const refreshToken = async (req, res, next) => {
 const logout = async (req, res, next) => {
   try {
     const token = req.cookies.refreshToken;
-    // Assuming user is authenticated to logout, or we parse from cookie
-    // If not authenticated, we might need to verify the token first to get the user ID
-    // or we just use `req.user.id` if this route is protected by `authenticate`.
-    
-    // For simplicity, if we have req.user, we use it. 
-    // Wait, let's assume this route is protected by the `authenticate` middleware.
-    if (req.user) {
-      await authService.logoutUser(req.user.id);
+    // logout user if authenticated with specific refresh token in a device 
+    if (token) {
+      await authService.logoutUser(token);
     }
     
     res.clearCookie('refreshToken');

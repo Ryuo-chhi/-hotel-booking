@@ -11,6 +11,7 @@ import bookings from "./booking.model.js";
 import rooms from "./room.model.js";
 import room_types from "./room-type.model.js";
 import transactions from "./transaction.model.js";
+import refreshToken from "./refresh-token.model.js";
 
 // User - Booking (One-to-Many)
 user.hasMany(bookings, {
@@ -45,4 +46,8 @@ transactions.belongsTo(bookings, {
   foreignKey: "booking_id",
 });
 
-export { sequelize, user, bookings, rooms, room_types, transactions };
+// User - RefreshToken (One-to-Many)
+user.hasMany(refreshToken, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+refreshToken.belongsTo(user, { foreignKey: 'user_id' });
+
+export { sequelize, user, bookings, rooms, room_types, transactions, refreshToken };

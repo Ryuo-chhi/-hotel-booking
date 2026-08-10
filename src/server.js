@@ -9,7 +9,7 @@ import app from './app.js';
 import { sequelize } from './models/index.js';
 import logger from './utils/logger.js';
 
-const PORT =  3000;
+const PORT = process.env.PORT || 3000;
 
 async function startServer() {
   const startTime = Date.now();

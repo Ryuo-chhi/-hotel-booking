@@ -4,6 +4,8 @@
  * Responsibility: Outlines database credentials configurations for development, test, and production environments.
  */
 
+import 'dotenv/config';
+
 export default {
   development: {
     username: process.env.DB_USER || 'root',
