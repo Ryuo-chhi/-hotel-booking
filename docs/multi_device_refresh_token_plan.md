@@ -15,7 +15,7 @@ Upgrade the architecture to **Option 3**:
 
 ## 🚀 Step-by-Step Implementation Guide
 
-### Step 1: Create Database Migration using Sequelize CLI
+### [x] Step 1: Create Database Migration using Sequelize CLI (Completed)
 
 Run the following command in your terminal to generate a new migration file:
 
@@ -88,7 +88,7 @@ npx sequelize-cli db:migrate
 
 ---
 
-### Step 2: Define the Sequelize Model & Associations
+### [x] Step 2: Define the Sequelize Model & Associations (Completed)
 
 #### 1. Create `src/models/refresh-token.model.js`:
 ```javascript
@@ -145,7 +145,7 @@ Remove the `refreshToken` column from the user model definition.
 
 ---
 
-### Step 3: Create Refresh Token Repository
+### [x] Step 3: Create Refresh Token Repository (Completed)
 
 Create `src/repositories/refresh-token.repository.js`:
 
@@ -178,7 +178,7 @@ export {
 
 ---
 
-### Step 4: Update Business Logic (`src/services/auth.service.js`)
+### [x] Step 4: Update Business Logic (`src/services/auth.service.js`) (Completed)
 
 We will use Node's built-in `crypto` module to hash the refresh token before saving it to the DB.
 
@@ -262,7 +262,7 @@ const logoutUser = async (token) => {
 
 ---
 
-### Step 5: Update Controller & Pass `User-Agent`
+### [x] Step 5: Update Controller & Pass `User-Agent` (Completed)
 
 In `src/controllers/auth.controller.js`:
 Pass `req.headers['user-agent']` as `deviceName` to `registerUser` and `authenticateUser`:
