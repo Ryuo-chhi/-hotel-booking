@@ -37,7 +37,7 @@ async function seedDatabase() {
         email: faker.internet.email(),
         password: passwordHash,
         phone_number: faker.phone.number({ style: 'national' }),
-        role: faker.helpers.arrayElement(['staff', 'customer'])
+        role: faker.helpers.arrayElement(['manager', 'customer'])
       });
     }
 
@@ -94,7 +94,7 @@ async function seedDatabase() {
     console.log(`✅ Created ${createdRooms.length} rooms.`);
 
     // 4. Seed Bookings
-    const customerUsers = createdUsers.filter(u => u.role === 'customer' || u.role === 'staff');
+    const customerUsers = createdUsers.filter(u => u.role === 'customer' || u.role === 'manager');
     const bookingsData = [];
 
     for (let k = 0; k < 8; k++) {

@@ -24,10 +24,7 @@ const registerSchema = [
     .isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
   body('phone_number')
     .trim()
-    .notEmpty().withMessage('Phone number is required'),
-  body('role')
-    .optional()
-    .isIn(['admin', 'manager', 'staff', 'customer']).withMessage('Role must be one of: admin, manager, staff, customer')
+    .notEmpty().withMessage('Phone number is required')
 ];
 
 /**

@@ -25,7 +25,7 @@ const hashToken = (token) => {
  * @returns {Promise<object>} The created User model instance profile
  */
 const registerUser = async (userData) => {
-  const { username, email, password, phone_number, role, device_name } = userData;
+  const { username, email, password, phone_number, device_name } = userData;
 
   // Check if email already exists
   const existingUser = await userRepository.findByEmail(email);
@@ -43,7 +43,7 @@ const registerUser = async (userData) => {
     email,
     password: hashedPassword,
     phone_number,
-    role: role || "customer",
+    role: "customer",
   });
 
   // Generate JWT tokens
