@@ -58,7 +58,4 @@ function authorize(allowedRoles) {
   };
 }
 
-export {
-  authenticate,
-  authorize,
-};
+export { authenticate, authorize };

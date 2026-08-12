@@ -35,8 +35,8 @@ const room_types = sequelize.define("room_types", {
       type: DataTypes.JSON,
       allowNull: false,
     }
-
-
 })
+
+
 
 export default room_types

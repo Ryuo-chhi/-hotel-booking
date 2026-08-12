@@ -31,11 +31,11 @@ rooms.belongsTo(room_types, {
 
 //Booking - Room (One-to-Many)
 
-bookings.hasMany(rooms, {
-  foreignKey: "booking_id",
+rooms.hasMany(bookings, {
+  foreignKey: "room_id",
 });
-rooms.belongsTo(bookings, {
-  foreignKey: "booking_id",
+bookings.belongsTo(rooms, {
+  foreignKey: "room_id",
 });
 
 // Booking - Transaction (One-to-one)

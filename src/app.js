@@ -1,19 +1,20 @@
 /**
  * Express Application Configuration
- * 
+ *
  * Responsibility: Initializes Express app, registers standard security middlewares,
  * binds rate-limiters, mounts routing branches, and maps global error wrappers.
  */
 
-import express from 'express';
-import helmet from 'helmet';
-import cors from 'cors';
-import morgan from 'morgan';
-import cookieParser from 'cookie-parser';
-import logger from './utils/logger.js';
+import express from "express";
+import helmet from "helmet";
+import cors from "cors";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
+import logger from "./utils/logger.js";
 
 import authRoutes from "./routes/auth.routes.js";
-import { errorHandler } from './middlewares/error.middleware.js';
+import roomRoutes from "./routes/room.routes.js";
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 
@@ -22,18 +23,20 @@ app.use(helmet());
 app.use(cors());
 
 // HTTP request logger mapping morgan to winston
-app.use(morgan('dev', {
-  stream: { write: (message) => logger.info(message.trim()) }
-}));
+app.use(
+  morgan("dev", {
+    stream: { write: (message) => logger.info(message.trim()) },
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Route loading placeholders
 app.use("/api/auth", authRoutes);
-
+app.use("/api/rooms", roomRoutes);
 
 // Global error handling placeholder
-app.use(errorHandler)
+app.use(errorHandler);
 
 export default app;

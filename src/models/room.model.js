@@ -17,11 +17,17 @@ const rooms = sequelize.define('rooms',{
     type: DataTypes.INTEGER,
     allowNull: false
   },
+  image_url:{
+    type: DataTypes.TEXT,
+    allowNull: true,
+    defaultValue: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32'
+  },
   status:{
     type: DataTypes.ENUM('available','occupied','maintenance'),
     allowNull: false,
     defaultValue: 'available'
   }
 })
+
 
 export default rooms;

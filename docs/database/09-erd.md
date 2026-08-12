@@ -32,12 +32,13 @@ erDiagram
 
     rooms {
         int id PK
-        varchar room_number UK
         int room_type_id FK
-        enum status "active, maintenance"
+        text image_url
+        enum status "available, occupied, maintenance"
         datetime created_at
         datetime updated_at
     }
+
 
     bookings {
         int id PK

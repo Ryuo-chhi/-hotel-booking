@@ -51,6 +51,7 @@ async function seedDatabase() {
         description: 'Cozy single room suitable for solo travelers.',
         base_rate: 50.00,
         max_occupancy: 1,
+        image_url: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304',
         amenities: ['Free WiFi', 'Air Conditioning', 'TV']
       },
       {
@@ -58,6 +59,7 @@ async function seedDatabase() {
         description: 'Spacious double room with king size bed and city view.',
         base_rate: 120.00,
         max_occupancy: 2,
+        image_url: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32',
         amenities: ['Free WiFi', 'Air Conditioning', 'TV', 'Mini Bar', 'Balcony']
       },
       {
@@ -65,6 +67,7 @@ async function seedDatabase() {
         description: 'Luxury suite with living room and ocean view.',
         base_rate: 250.00,
         max_occupancy: 4,
+        image_url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b',
         amenities: ['Free WiFi', 'Air Conditioning', 'TV', 'Mini Bar', 'Jacuzzi', 'Breakfast Included']
       },
       {
@@ -72,23 +75,34 @@ async function seedDatabase() {
         description: 'Top-tier luxury experience with private pool and butler service.',
         base_rate: 500.00,
         max_occupancy: 6,
+        image_url: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461',
         amenities: ['Free WiFi', 'Air Conditioning', 'TV', 'Mini Bar', 'Jacuzzi', 'Private Pool', 'Butler']
       }
     ];
+
 
     const createdRoomTypes = await room_types.bulkCreate(roomTypesData);
     console.log(`✅ Created ${createdRoomTypes.length} room types.`);
 
     // 3. Seed Rooms
+    const sampleImages = [
+      'https://images.unsplash.com/photo-1631049307264-da0ec9d70304',
+      'https://images.unsplash.com/photo-1611892440504-42a792e24d32',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b',
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461'
+    ];
+
     const roomsData = [];
     for (const type of createdRoomTypes) {
       for (let j = 1; j <= 4; j++) {
         roomsData.push({
           room_type_id: type.id,
+          image_url: faker.helpers.arrayElement(sampleImages),
           status: faker.helpers.arrayElement(['available', 'occupied', 'maintenance'])
         });
       }
     }
+
 
     const createdRooms = await rooms.bulkCreate(roomsData);
     console.log(`✅ Created ${createdRooms.length} rooms.`);
